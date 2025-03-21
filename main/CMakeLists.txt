@@ -21,6 +21,6 @@ set(includedirs
 #../components/conversions/include/
 )
 
-set(requires M5Core2 lvgl arduino)
+set(requires M5Core2 lvgl )
 
 idf_component_register(INCLUDE_DIRS ${includedirs} SRCS ${CORE_SRCS} )
