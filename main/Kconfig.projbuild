@@ -1,0 +1,130 @@
+menu "TicCAM Main Application Configuration"
+
+config ENABLE_CUSTOMER_RELEASE
+    bool "Customer Release"
+    default y if PRESET_CUSTOMER_RELEASE
+    default n if PRESET_INTERNAL_DEBUG
+    help
+        Enables customer release.
+
+# ---- TWID Sensor Model Selection (Only One Can Be Selected) ----
+choice
+    prompt "Select TWID Sensor Model"
+    default TWID03_SUPPORT  # Set the default sensor
+
+    config TWID02_SUPPORT
+        bool "Support TWID02 33x33"
+        help
+            Enable this option if you want to use the TWID02.
+            Only one TWID model can be selected at a time.
+
+    config TWID03_SUPPORT
+        bool "Support TWID03 64x48"
+        help
+            Enable this option if you want to use the TWID03.
+            Only one TWID model can be selected at a time.
+
+    config TWID04_SUPPORT
+        bool "Support TWID04 64x4"
+        help
+            Enable this option if you want to use the TWID04.
+            Only one TWID model can be selected at a time.
+
+endchoice
+
+config MODEL
+    string "Device Model"
+    default "TicCAM-1.1kpix" if TWID02_SUPPORT
+    default "TicCAM-3.3kpix" if TWID03_SUPPORT
+    default "TicCAM-TxRx" if TWID04_SUPPORT
+    help
+        The device model name corresponding to the selected TWID sensor.
+
+config FIRMWARE
+    string "Firmware Name"
+    default "TW_ID02" if TWID02_SUPPORT
+    default "TW_ID03" if TWID03_SUPPORT
+    default "TW_ID04" if TWID04_SUPPORT
+    help
+        The firmware identifier based on the selected TWID sensor.
+
+config REVISION
+    string "Build Revision"
+    default "1a"
+    help
+        Identifier for the current build. Can be used to distinguish between development and production builds.
+
+# ---- Menu Configuration ----
+menu "Select Available Menus"
+
+    config MENU_TAB2
+        bool "Enable Sliders Tab2"
+        default y
+
+    config MENU_TAB3
+        bool "Enable Feature Settings Tab3"
+        default y
+
+    config MENU_TAB4
+        bool "Enable SPI Chip Config Tab4"
+        default y if PRESET_INTERNAL_DEBUG
+        default n if PRESET_CUSTOMER_RELEASE
+
+endmenu
+
+# ---- Slider Configuration ----
+menu "Select Available Sliders"
+
+    config BIAS_SLIDERS
+        bool "Enable Bias Sliders"
+        default y if PRESET_INTERNAL_DEBUG
+        default n if PRESET_CUSTOMER_RELEASE
+
+endmenu
+
+# ---- Feature Configuration ----
+menu "Select Available Features"
+
+    config BILINEAR_INTERPOLATION
+        bool "Enable Bilinear Interpolation"
+        default y if PRESET_INTERNAL_DEBUG
+        default n if PRESET_CUSTOMER_RELEASE
+
+    config VIDEO_FILTER
+        bool "Enable Video Filter"
+        default y if PRESET_INTERNAL_DEBUG
+        default n if PRESET_CUSTOMER_RELEASE
+
+    config MONITOR_VERBOSE
+        bool "Enable Extra Verbose Logging (Chip ID)"
+        default y if PRESET_INTERNAL_DEBUG
+        default n if PRESET_CUSTOMER_RELEASE
+
+    config WIFI_AP
+        bool "Enable WiFi AP Mode"
+        default y if PRESET_INTERNAL_DEBUG
+        default y if PRESET_CUSTOMER_RELEASE
+
+    config LDOFAN_ENABLE
+        bool "Enable LDO Fan Control"
+        default y if PRESET_INTERNAL_DEBUG
+        default n if PRESET_CUSTOMER_RELEASE
+
+    config EXTENDED_CLK_SETTINGS
+        bool "Enable Extended Clock Settings"
+        default y if PRESET_INTERNAL_DEBUG
+        default n if PRESET_CUSTOMER_RELEASE
+
+    config VIDEOCONTROLLER
+        bool "Enable Extra Video Controller Features"
+        default y if PRESET_INTERNAL_DEBUG
+        default n if PRESET_CUSTOMER_RELEASE
+
+    config IMAGE_ZOOM
+        bool "Enable Image Zoom Feature"
+        default y if PRESET_INTERNAL_DEBUG
+        default n if PRESET_CUSTOMER_RELEASE
+
+endmenu
+
+endmenu

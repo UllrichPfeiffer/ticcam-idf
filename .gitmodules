@@ -1,0 +1,6 @@
+[submodule "TicWave-Python-API"]
+	path = TicWave-Python-API
+	url = git@github.com:UllrichPfeiffer/TicWave-Python-API.git
+[submodule "components/tw-camera"]
+	path = components/tw-camera
+	url = git@github.com:UllrichPfeiffer/tw-camera.git

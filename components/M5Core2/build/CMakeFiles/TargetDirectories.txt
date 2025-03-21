@@ -1,0 +1,2 @@
+/home/ullrich/DATEN/ticwave/tw_chips/sources/tw_id01/M5Stack/M5StackSarrayLib/components/M5Core2/build/CMakeFiles/rebuild_cache.dir
+/home/ullrich/DATEN/ticwave/tw_chips/sources/tw_id01/M5Stack/M5StackSarrayLib/components/M5Core2/build/CMakeFiles/edit_cache.dir
