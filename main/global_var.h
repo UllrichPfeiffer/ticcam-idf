@@ -1,7 +1,4 @@
-// global_var.h
-#ifndef GLOBAL_VAR_H
-#define GLOBAL_VAR_H
-
+#pragma once
 #include "AD5686.h"
 #include "MCP466_DigitalPot.h" 
 #include <WiFi.h>
@@ -12,14 +9,14 @@
 #include <Preferences.h> // instead of #include <EEPROM.h>
 #include "sdkconfig.h"
 
-#if !(CONFIG_TWID02_SUPPORT || CONFIG_TWID03_SUPPORT || CONFIG_TWID04_SUPPORT)
-    #error "You must enable one of CONFIG_TWIDxx_SUPPORT in menuconfig."
-#endif
-
-#if CONFIG_TWID04_SUPPORT
+    #if CONFIG_TWID02_SUPPORT
+    #elif CONFIG_TWID03_SUPPORT
+    #elif CONFIG_TWID04_SUPPORT
 #include "Adafruit_EMC2101.h"
 #include "Adafruit_MCP4725.h"
-#endif
+    #else
+#error "No valid CONFIG_TWIDxx_SUPPORT defined!"
+    #endif
 
 #define OR_DEFAULT 0
 #define OR_HMIRROR 1
@@ -328,4 +325,4 @@ static camera_config_t camera_config = {
                         // if set to one we will miss out every other frame!!!
     .grab_mode = CAMERA_GRAB_LATEST, //CAMERA_GRAB_LATEST, //CAMERA_GRAB_WHEN_EMPTY,
 };
-#endif
+

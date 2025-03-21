@@ -1,8 +1,6 @@
 // TicWave GmbH, U. Pfeiffer 15.3.2023
 // Main header
-
-#ifndef MAIN_H
-#define MAIN_H
+#pragma once
 
 //#include <M5Core2.h>
 //#include <lvgl.h>
@@ -473,5 +471,3 @@ uint8_t DEF_CHOPPER_SELECT = 0x00;
 #define IMG_ALG_TYPE_PEAK 0x04
 #define IMG_ALG_TYPE_NORM 0x08
 #define IMG_ALG_TYPE_FILT 0x10
-
-#endif

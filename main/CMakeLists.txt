@@ -13,7 +13,6 @@ global_var.cpp
 colormap.cpp
 ADS1100.cpp
 )
-#app_httpd.cpp
 
 set(includedirs
 .
@@ -21,6 +20,6 @@ set(includedirs
 #../components/conversions/include/
 )
 
-set(requires M5Core2 lvgl )
+set(requires M5Core2 lvgl)
 
 idf_component_register(INCLUDE_DIRS ${includedirs} SRCS ${CORE_SRCS} )

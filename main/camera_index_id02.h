@@ -1,4 +1,5 @@
-const char camera_index_html[] = R"=====(<!doctype html>
+#pragma once
+const uint8_t camera_index_html[] = R"=====(<!doctype html>
 <html>
     <head>
         <meta charset="utf-8">

@@ -1,9 +1,6 @@
 // TicWave GmbH, U. Pfeiffer 15.3.2023
 // Header related to the serial communication
-
-#ifndef TW_CLASS_H
-#define TW_CLASS_H
-
+#pragma once
 #include <lvgl.h>
 #include <vector>
 #include "MCP466_DigitalPot.h" 
@@ -520,6 +517,3 @@ class MyXCLK: public MyDevice {
     void ClockEnable();
     void ClockDisable();
 };
-
-
-#endif

@@ -10,10 +10,7 @@
 #include "sensor.h"
 #include "SdFat.h"
 #include <Preferences.h> // instead of #include <EEPROM.h>
-#if CONFIG_TWID04_SUPPORT
-#include "Adafruit_EMC2101.h"
-#include "Adafruit_MCP4725.h"
-#endif
+
 Preferences preferences;
 
 RTC_TimeTypeDef RTCtime;

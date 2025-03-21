@@ -14,7 +14,6 @@
 #include "../components/lvgl/src/font/lv_font.h"
 #include "cam_filter.h"
 #include "colormap.h"
-
 #include "MCP466_DigitalPot.h"
 #include <ESPmDNS.h>
 #include <WiFiUdp.h>
@@ -24,14 +23,20 @@
 #include "driver/i2s.h"
 #include "driver/ledc.h"
 #include "esp_http_server.h"
-
 #include "main.h"
 #include "global_var.h"
 #include "tw_class.h" // TicWave class defs for serial IO
-
 #include "TicWaveLogo6_98x30_g.c" // on COLOR_SCR // https://lvgl.io/tools/imageconverter
-#include "camera_index.h"
 #include "SdFat.h"
+
+    #if CONFIG_TWID02_SUPPORT
+#include "camera_index_id02.h"
+    #elif CONFIG_TWID03_SUPPORT
+#include "camera_index_id03.h"
+    #elif CONFIG_TWID04_SUPPORT
+    #else
+#error "No valid CONFIG_TWIDxx_SUPPORT defined!"
+    #endif
 
 static esp_err_t http_server_init();
 uint16_t tab_count;
