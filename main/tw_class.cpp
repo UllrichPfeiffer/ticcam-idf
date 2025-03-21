@@ -13,7 +13,6 @@
 #include "esp_log.h"
 #include "colormap.h"
 #include "cam_filter.h"
-#include "arduinoFFT.h"
 #include "MCP466_DigitalPot.h"
 #include "XClk.h"
 #include "driver/ledc.h"

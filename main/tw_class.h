@@ -6,7 +6,6 @@
 
 #include <lvgl.h>
 #include <vector>
-#include "arduinoFFT.h"
 #include "MCP466_DigitalPot.h" 
 #include "ADS1100.h"
 #include "XClk.h"
@@ -315,8 +314,6 @@ class MyScope: public MyGraph {
 // for time, freq, and spectrogram:
     lv_draw_line_dsc_t line_dsc;
     lv_draw_label_dsc_t label_dsc;
-//    double vReal[FFT_SAMPLES];
-//    double vImag[FFT_SAMPLES];
     static void cb(lv_event_t * event); // generic call back, not used yet
     void DoIt();
     void TimeDomain();
@@ -324,7 +321,6 @@ class MyScope: public MyGraph {
     void Spectrogram();
     uint32_t bilinearInterpolation(uint32_t topLeft, uint32_t topRight, uint32_t bottomLeft, uint32_t bottomRight, double x, double y);
     lv_color_t bilinearInterpolationRGB(lv_color_t tl, lv_color_t tr, lv_color_t bl, lv_color_t br, double x_ratio, double y_ratio);
-    arduinoFFT FFT;
 // video part:
     lv_color_t color;
     uint32_t min; 

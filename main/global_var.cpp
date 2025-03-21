@@ -6,7 +6,6 @@
 #include <WiFi.h>
 #include "tw_class.h"
 #include "main.h"
-#include <arduinoFFT.h>
 #include "BMP.h"
 #include "sensor.h"
 #include "SdFat.h"
