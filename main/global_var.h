@@ -57,8 +57,6 @@ extern MyMCP4725 *DAC_MCP4725;
 #endif
 
 #if CONFIG_TWID02_SUPPORT || CONFIG_TWID03_SUPPORT
-extern lv_obj_t *btnm4; // register map
-extern lv_obj_t *btnm3; // peak, zero, time, histo, stats
 extern MyPOT *POT_REF;
 extern MyPOT *POT_DET;
 extern MyPOT *POT_VCO;
@@ -70,6 +68,9 @@ extern MyADCi2c *ADC_TEMP;
 extern MyTEMP *TEMP_CAMERA;
 
 #endif
+
+extern lv_obj_t *btnm4; // register map
+extern lv_obj_t *btnm3; // peak, zero, time, histo, stats
 
 //extern const int supportedBaudRates[];
 const int supportedBaudRates[] = {9600, 19200, 38400, 57600, 115200, 250000, 500000, 1000000, 2000000};

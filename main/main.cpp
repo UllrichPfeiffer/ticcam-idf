@@ -34,6 +34,7 @@
     #elif CONFIG_TWID03_SUPPORT
 #include "camera_index_id03.h"
     #elif CONFIG_TWID04_SUPPORT
+#include "camera_index_id04.h"
     #else
 #error "No valid CONFIG_TWIDxx_SUPPORT defined!"
     #endif
@@ -217,16 +218,7 @@ void setup()
                                                       // !!! you need to free I2S0 resources blocked by the speaker: uncomment Spk.begin(); in M5Core2.cpp
 
   Serial.begin(DEFAULT_SERIAL_BAUDRATE); // need to reset the serial baudrate
-  // M5.begin with I2CEnable = true resets pins 32, 33 (FAN_RPM, PUMP_RPM) -> therefore I2C should be false here
-  // I2CEnable can be used with modified MCP Library
 
-  // M5.begin(true, true, true, true);
-  // Wire interface is for the PA_SCL, PA_SDA, not sure what it is used for but the intSCL, intSDA is on Wire1 in the M5Core Library
-  // Wire.begin(GPIO_INT_SDA, GPIO_INT_SCL); // only after M5.begin enabled I2C
-
-  //  M5.Lcd.setRotation(1);
-  //  M5.Axp.SetLcdVoltage(2800);
-  //  M5.Axp.SetLcdVoltage(3300);
   M5.Axp.SetSpkEnable(0);
   M5.Axp.SetLed(1);
   M5.Axp.SetLcdVoltage(2800);
@@ -236,7 +228,12 @@ void setup()
 
   M5.Lcd.println("Booting TicWave " + ThisDevice->firmware);
   my_debug("Booting TicWave " + ThisDevice->firmware);
+  
+#if CONFIG_TWID04_SUPPORT
+  M5.Axp.SetBusPowerMode(1); // do not switch off ext 5V bus pin
+#else
   M5.Axp.SetBusPowerMode(0); // set 0 for USB/BAT power supply, set 1 for external input power supply and change kMBusModeOutput in M5.begin
+#endif
   M5.Axp.SetCHGCurrent(AXP192::kCHG_550mA);
 
   if(0){
@@ -396,6 +393,7 @@ void setup()
   #elif CONFIG_TWID03_SUPPORT
     // this is done while setting the MEMORY registers for min/max of col/row
   #elif CONFIG_TWID04_SUPPORT
+    camera->init(); // this requires a canvas 
   #else
   #error "No valid CONFIG_TWIDxx_SUPPORT defined!"
   #endif
@@ -550,6 +548,7 @@ void setup()
   MEM_PCLK_LB = new MyMEM(ASIC_CAM_PCLK_CYC_LBYTE, "Integration", "  %3.0f", 50, 20, 255, 1.0); // default 100 for id02 and 50 for id03
     #elif CONFIG_TWID04_SUPPORT
     #else
+  MEM_PCLK_LB = new MyMEM(ASIC_CAM_PCLK_CYC_LBYTE, "Integration", "  %3.0f", 40, 20, 255, 1.0); // default 40 for ID03 and ID04
     #endif
   MEM_PCLK_LB->SliderCreate(posy += POS_SKIP_SLIDER, LV_SLIDER_MODE_NORMAL, tab2);
   MEM_PCLK_LB->TableCreate(line++, table);
@@ -624,10 +623,9 @@ void setup()
   lv_obj_t *roller_colormap_label = lv_label_create(tab2);
   lv_label_set_text(roller_colormap_label, "Color Map");
   lv_obj_align_to(roller_colormap_label, roller_colormap, LV_ALIGN_OUT_TOP_MID, 0, -10);
-
+  roller_chopper_cyc = lv_roller_create(tab2);
     #if CONFIG_TWID02_SUPPORT
   /* Create chopper cyc roller */
-  roller_chopper_cyc = lv_roller_create(tab2);
   lv_roller_set_options(roller_chopper_cyc,
                         "1\n"
                         "2\n"
@@ -643,7 +641,6 @@ void setup()
                         LV_ROLLER_MODE_INFINITE);
     #elif CONFIG_TWID03_SUPPORT
   /* Create chopper cyc roller */
-  roller_chopper_cyc = lv_roller_create(tab2);
   lv_roller_set_options(roller_chopper_cyc,
                         "1\n"
                         "2\n"
@@ -661,6 +658,19 @@ void setup()
                         "66",
                         LV_ROLLER_MODE_INFINITE);
     #elif CONFIG_TWID04_SUPPORT
+  lv_roller_set_options(roller_chopper_cyc,
+                        "1\n"
+                        "2\n"
+                        "3\n"
+                        "4\n"
+                        "5\n"
+                        "6\n"
+                        "8\n"
+                        "9\n"
+                        "12\n"
+                        "18\n"
+                        "36",
+                        LV_ROLLER_MODE_INFINITE);
     #else
     #endif
 

@@ -10,7 +10,6 @@
 #include "sensor.h"
 #include "SdFat.h"
 #include <Preferences.h> // instead of #include <EEPROM.h>
-
 Preferences preferences;
 
 RTC_TimeTypeDef RTCtime;

@@ -16,7 +16,6 @@
 #include "MCP466_DigitalPot.h"
 #include "XClk.h"
 #include "driver/ledc.h"
-
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
@@ -942,7 +941,6 @@ void MyScan::SerialPrint()
 void MyScan::DoIt()
 {
   bool found = false;
-  //SCOPE->graph_idx = SCOPE_TYPE_IDLE; // make sure there is nothing running in the background
   my_debug("MyScan DoIt cmd: " + String(cmd));
   my_debug("Scan through public commands: " + String(ThisDevice->num_remote_cmds_public));
   for (uint8_t i=0; i < ThisDevice->num_remote_cmds_public; i++)
@@ -2648,7 +2646,7 @@ void MyMEM::DoIt()
   switch (address)
   {
     #if CONFIG_TWID02_SUPPORT
-    #elif CONFIG_TWID03_SUPPORT
+    #elif CONFIG_TWID03_SUPPORT || CONFIG_TWID04_SUPPORT
   case ASIC_CAM_ROW_MAX:{
 //    camera->WriteMem(ASIC_CAM_VC_EN, 0);
     YRES = cnt-cnt2+1;
@@ -2659,8 +2657,6 @@ void MyMEM::DoIt()
     my_debug("MEM DoIt address: " + String(address) + " " + String(cnt) + " " + String(Cnt2Volt(cnt)));
     camera->WriteMem(ASIC_CAM_ROW_MIN, (uint8_t)cnt2); 
     my_debug("MEM DoIt address: " + String(ASIC_CAM_ROW_MIN) + " " + String(cnt2) + " " + String(Cnt2Volt(cnt2)));
-//    init_canvas();
-//    camera->WriteMem(ASIC_CAM_VC_EN, 1);
   break;
   } 
   case ASIC_CAM_COL_MAX:
@@ -2673,11 +2669,7 @@ void MyMEM::DoIt()
     my_debug("MEM DoIt address: " + String(address) + " " + String(cnt) + " " + String(Cnt2Volt(cnt)));   
     camera->WriteMem(ASIC_CAM_COL_MIN, (uint8_t)cnt2); 
     my_debug("MEM DoIt address: " + String(ASIC_CAM_COL_MIN) + " " + String(cnt2) + " " + String(Cnt2Volt(cnt2)));    
-//    init_canvas();
-//    camera->WriteMem(ASIC_CAM_VC_EN, 1);
     break;
-    #elif CONFIG_TWID04_SUPPORT
-    #else
     #endif
 
   default:
